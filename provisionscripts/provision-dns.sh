@@ -1,5 +1,11 @@
 #!/bin/bash
 
+get_redhat_release () {
+    # provided by Tim C
+    sed -e 's/^[^0-9]*//' -e 's/\..*$//' /etc/redhat-release
+}
+
+
 interface=$(ip link | grep '^[0-9]*: \(en\|eth\)' | awk '{print $2}' | cut -d: -f1 | head -n 1)
 ipaddr=$(ip -4 addr show $interface | grep inet | awk '{print $2}' | cut -d/ -f1)
 
@@ -11,27 +17,20 @@ yum install -y dnsmasq
 
 echo 'listen-address=127.0.0.1' >> /etc/dnsmasq.conf
 
-# EL7 uses NetworkManager
-# This is a ghetto way of editing a specific section in a config file
-perl -i.bak -lne '
-    BEGIN {
-        $in_main = 0;
-        $START_OF_MAIN = qr{\[main\]};
-        $NEW_SECTION = qr{\[.+\]};
-    }
-    if ($_ =~ $START_OF_MAIN) {
-        $in_main = 1;
-        print $_;
-        print "dns=dnsmasq";
-        next;
-    } elsif ($in_main && $_ =~ $NEW_SECTION) {
-        $in_main = 0;
-    }
+if [[ $(get_redhat_release) == 7 ]]; then
 
-    unless (/^\s*dns\s*=/ && $in_main) {
-        print $_;
-    }
-'  /etc/NetworkManager/NetworkManager.conf
+    echo 'dns=dnsmasq' >> /etc/NetworkManager/NetworkManager.conf
+    # EL7 uses NetworkManager
 
-systemctl restart NetworkManager
+    systemctl restart NetworkManager
+
+elif [[ $(get_redhat_release) == 6 ]]; then
+
+    echo 'prepend domain-name-servers 127.0.0.1;' >> /etc/dhclient.conf
+
+    hostname -F /etc/hostname
+
+    dhclient
+
+fi
 

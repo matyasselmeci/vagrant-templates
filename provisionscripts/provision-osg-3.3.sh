@@ -1,18 +1,33 @@
 #!/bin/bash
 
-rpm -U https://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm
-rpm -U http://repo.grid.iu.edu/osg/3.3/osg-3.3-el7-release-latest.rpm
+get_redhat_release () {
+    # provided by Tim C
+    sed -e 's/^[^0-9]*//' -e 's/\..*$//' /etc/redhat-release
+}
+
+enablerepo () {
+    reponame=$1
+    repofile=${2:-$1}
+
+    sed -i '/\['$reponame'\]/,/\[.*\]/s/enabled=0/enabled=1/' /etc/yum.repos.d/${repofile}.repo
+}
+
+rhel=$(get_redhat_release)
+
+rpm -U https://dl.fedoraproject.org/pub/epel/epel-release-latest-${rhel}.noarch.rpm
+rpm -U http://repo.grid.iu.edu/osg/3.3/osg-3.3-el${rhel}-release-latest.rpm
 
 # enable some repos
-for repo_name in epel osg-testing osg-minefield; do
-    sed -i '/\['$repo_name'\]/,/\[.*\]/s/enabled=0/enabled=1/' /etc/yum.repos.d/$repo_name.repo
-done
-# disable others
-for repo_name in osg; do
-    sed -i '/\['$repo_name'\]/,/\[.*\]/s/enabled=1/enabled=0/' /etc/yum.repos.d/$repo_name.repo
-done
+enablerepo epel
+if [[ $rhel == 6 ]]; then
+    enablerepo osg-testing osg-el6-testing
+    enablerepo osg-minefield osg-el6-minefield
+elif [[ $rhel == 7 ]]; then
+    enablerepo osg-testing
+    enablerepo osg-minefield
+fi
 # disable gpgcheck on all minefield repos
-sed -i 's/gpgcheck=1/gpgcheck=0/' /etc/yum.repos.d/osg-minefield.repo
+sed -i 's/gpgcheck=1/gpgcheck=0/' /etc/yum.repos.d/osg-*minefield.repo
 
 yum install -y yum-priorities
 yum install -y deltarpm || :
