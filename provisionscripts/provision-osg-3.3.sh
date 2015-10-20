@@ -32,7 +32,24 @@ sed -i 's/gpgcheck=1/gpgcheck=0/' /etc/yum.repos.d/osg-*minefield.repo
 yum install -y yum-priorities
 yum install -y deltarpm || :
 
-yum install --skip-broken -y bash-completion emacs-nox gdb git git-svn make mc rcs rpmconf screen subversion sudo tmux vim-enhanced yum-utils yum-fastestmirror
+yum install --skip-broken -y \
+    bash-completion \
+    emacs-nox \
+    gdb \
+    git \
+    git-svn \
+    make \
+    man \
+    mc \
+    rcs \
+    rpmconf \
+    screen \
+    subversion \
+    sudo \
+    tmux \
+    vim-enhanced \
+    yum-utils \
+    yum-fastestmirror
 
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-* || :
 
