@@ -75,6 +75,7 @@ Vagrant.configure(2) do |config|
 
   config.vm.provision "shell", path: "provisionscripts/provision-osg-3.3.sh"
   config.vm.provision "shell", path: "provisionscripts/provision-dns.sh"
+  config.vm.provision "shell", path: "provisionscripts/provision-cert.sh"
   config.vm.provision "shell", path: "provisionscripts/provision-matyas.sh"
 
 end
