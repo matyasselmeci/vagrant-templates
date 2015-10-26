@@ -30,6 +30,8 @@ elif [[ $(get_redhat_release) == 6 ]]; then
 
     hostname -F /etc/hostname
 
+    service dnsmasq start
+
     dhclient
 
 fi
