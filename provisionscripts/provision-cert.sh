@@ -12,7 +12,7 @@ cd /root
 mkdir -p certs
 cd certs
 
-rpm -q subversion &> /dev/null || yum install -y subversion > /dev/null
+rpm -q subversion &> /dev/null || yum install -d1 -y subversion > /dev/null
 
 # Get the files from subversion from a fixed revision (so the patch applies)
 for f in OSG-Test-CA.namespaces \

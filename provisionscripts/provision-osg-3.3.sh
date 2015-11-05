@@ -29,10 +29,10 @@ fi
 # disable gpgcheck on all minefield repos
 sed -i 's/gpgcheck=1/gpgcheck=0/' /etc/yum.repos.d/osg-*minefield.repo
 
-yum install -y yum-priorities
-yum install -y deltarpm || :
+yum install -d1 -y yum-priorities
+yum install -d1 -y deltarpm || :
 
-yum install --skip-broken -y \
+yum install --skip-broken -d1 -y \
     bash-completion \
     emacs-nox \
     gdb \

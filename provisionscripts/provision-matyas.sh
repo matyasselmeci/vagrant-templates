@@ -3,7 +3,7 @@
 utils_root=/usr/local/bin
 utils_path=$utils_root/utils
 
-rpm -q git || yum install -y git
+rpm -q git || yum install -y -d1 git
 echo "export PATH=$utils_path:\$PATH" > /etc/profile.d/utils.sh
 echo "setenv PATH $utils_path:\$PATH" > /etc/profile.d/utils.csh
 

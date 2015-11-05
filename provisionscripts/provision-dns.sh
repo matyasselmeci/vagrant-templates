@@ -13,7 +13,7 @@ printf "%s   %s\n" $ipaddr $(cat /etc/hostname) >> /etc/hosts
 
 # dnsmasq instructions adapted from https://wiki.archlinux.org/index.php/Dnsmasq
 
-yum install -y dnsmasq
+yum install -d1 -y dnsmasq
 
 echo 'listen-address=127.0.0.1' >> /etc/dnsmasq.conf
 

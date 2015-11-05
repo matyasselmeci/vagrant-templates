@@ -1,4 +1,4 @@
 #!/bin/bash
 
-yum install -y osg-build
+yum install -d1 -y osg-build
 
