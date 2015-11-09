@@ -1,5 +1,7 @@
 #!/bin/bash
 
+yum -d1 -y install createrepo
+
 cat > /etc/yum.repos.d/localtest.repo <<'__EOF__'
 [localtest]
 name=localtest
