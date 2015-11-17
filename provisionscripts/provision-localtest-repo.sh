@@ -14,4 +14,6 @@ keepcache = 0
 __EOF__
 
 mkdir -p /vagrant/repo
+createrepo /vagrant/repo || :
+ln -snf /vagrant/repo /localtest
 
