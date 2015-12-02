@@ -113,6 +113,14 @@ index 8857605..46edac8 100755
 __EOF__
 
 
+# in case patch(1) does not do renames:
+# rename OSG-Test-CA.namespaces => OSG-Test-Host-CA.namespaces (70%)
+# rename OSG-Test-CA.signing_policy => OSG-Test-Host-CA.signing_policy (74%)
+[[ -f OSG-Test-Host-CA.namespaces ]] || mv OSG-Test-CA.namespaces OSG-Test-Host-CA.namespaces
+[[ -f OSG-Test-Host-CA.signing_policy ]] || mv OSG-Test-CA.signing_policy OSG-Test-Host-CA.signing_policy
+
+
+
 chmod +x ca-generate-certs
 ./ca-generate-certs $(hostname -f)
 
