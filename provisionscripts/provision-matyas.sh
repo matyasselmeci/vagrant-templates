@@ -5,6 +5,7 @@ utils_path=$utils_root/utils
 
 rpm -q git || yum install -y -d1 git
 echo "export PATH=$utils_path:\$PATH" > /etc/profile.d/utils.sh
+echo "[ -d $utils_path/shellfn ] && for x in $utils_path/shellfn/*.sh; do . \$x || : ; done" >> /etc/profile.d/utils.sh
 echo "setenv PATH $utils_path:\$PATH" > /etc/profile.d/utils.csh
 
 pushd $utils_root
