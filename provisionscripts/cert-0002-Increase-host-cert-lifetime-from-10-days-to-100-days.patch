@@ -1,0 +1,29 @@
+From e9085f9af0c9f39d99ee801f112f68607af064a6 Mon Sep 17 00:00:00 2001
+From: Matyas Selmeci <matyas@cs.wisc.edu>
+Date: Thu, 3 Dec 2015 15:52:29 -0600
+Subject: [PATCH 2/2] Increase host cert lifetime from 10 days to 100 days
+
+---
+ ca-generate-certs | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/ca-generate-certs b/ca-generate-certs
+index 46edac8..715f1f6 100755
+--- a/ca-generate-certs
++++ b/ca-generate-certs
+@@ -15,11 +15,11 @@ OPENSSL_CONFIG=openssl.config
+ CA_SUBJECT='/DC=org/DC=Open Science Grid/O=OSG Test/CN=OSG Test Host CA'
+ HOST_REQUEST=host-cert-request.pem
+ HOST_REQ_PRIV=hostkey.pem
+ HOST_CERT_SUBJECT="/DC=org/DC=Open Science Grid/O=OSG Test/OU=Services/CN=$hostname"
+ SERIAL_NUMBER=A1B2C3D4E5F6
+-DAYS=10
++DAYS=100
+ CRL_NUMBER_FILE=crlnumber
+ CRL_FILE=OSG-Test-Host-CA.r0
+ 
+ # Clean up from previous run
+ rm -f *.pem *.r0
+-- 
+2.6.3
+
