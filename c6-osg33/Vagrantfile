@@ -78,6 +78,7 @@ Vagrant.configure(2) do |config|
   #config.vm.provision "shell", path: "provisionscripts/provision-cert.sh"
   config.vm.provision "shell", path: "provisionscripts/provision-matyas.sh"
   config.vm.provision "shell", path: "provisionscripts/provision-localtest-repo.sh"
+  config.vm.provision "shell", path: "provisionscripts/provision-etckeeper.sh"
 
 
 end
