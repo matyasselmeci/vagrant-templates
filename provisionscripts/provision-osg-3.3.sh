@@ -38,6 +38,7 @@ yum install --skip-broken -d1 -y \
     gdb \
     git \
     git-svn \
+    mailx \
     make \
     man \
     mc \
