@@ -17,7 +17,7 @@ done
 yum install -y -d1 yum-priorities
 yum install -y -d1 deltarpm || :
 
-yum install --skip-broken -y -d1 bash-completion emacs-nox gdb git git-svn make mc rcs rpmconf screen subversion sudo tmux vim-enhanced yum-utils yum-fastestmirror
+yum install --skip-broken -y -d1 bash-completion emacs-nox gdb git git-svn make mc rcs rpm rpmconf screen subversion sudo tmux vim-enhanced yum-utils yum-fastestmirror
 
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-* || :
 
