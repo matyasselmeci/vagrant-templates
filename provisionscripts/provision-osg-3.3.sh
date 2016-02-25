@@ -52,5 +52,7 @@ yum install --skip-broken -d1 -y \
     yum-utils \
     yum-fastestmirror
 
+rm -f /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-Debug-7
+
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-* || :
 
