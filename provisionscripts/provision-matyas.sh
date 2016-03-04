@@ -23,6 +23,10 @@ git clone http://pages.cs.wisc.edu/~matyas/newshell.git
 ./newshell/install.sh ~vagrant
 chown -R vagrant:vagrant ~vagrant
 
+rpm -q zsh || yum install -y -d1 zsh
+chsh -s /bin/zsh root
+chsh -s /bin/zsh vagrant
+
 #first_if=$($utils_path/list-eth-interfaces | head -n 1)
 #if [[ $? == 0 && -n $first_if ]]; then
 #    ipaddr=$($utils_path/get-ip-address $first_if)
