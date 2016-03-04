@@ -1,7 +1,6 @@
 #!/bin/bash
 
-rpm -q etckeeper || yum install -y -d1 etckeeper
-rpm -q git || yum install -y -d1 git
+yum install -d1 -y etckeeper git
 
 git config --global --get user.name &> /dev/null || (
     git config --global user.name "root"

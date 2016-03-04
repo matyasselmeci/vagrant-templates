@@ -3,7 +3,8 @@
 utils_root=/usr/local/bin
 utils_path=$utils_root/utils
 
-rpm -q git || yum install -y -d1 git
+yum install -y -d1 git zsh
+
 echo "export PATH=$utils_path:\$PATH" > /etc/profile.d/utils.sh
 echo "[ -d $utils_path/shellfn ] && for x in $utils_path/shellfn/*.sh; do . \$x || : ; done" >> /etc/profile.d/utils.sh
 echo "setenv PATH $utils_path:\$PATH" > /etc/profile.d/utils.csh
@@ -23,7 +24,6 @@ git clone http://pages.cs.wisc.edu/~matyas/newshell.git
 ./newshell/install.sh ~vagrant
 chown -R vagrant:vagrant ~vagrant
 
-rpm -q zsh || yum install -y -d1 zsh
 chsh -s /bin/zsh root
 chsh -s /bin/zsh vagrant
 
