@@ -24,8 +24,10 @@ git clone http://pages.cs.wisc.edu/~matyas/newshell.git
 ./newshell/install.sh ~vagrant
 chown -R vagrant:vagrant ~vagrant
 
-chsh -s /bin/zsh root
-chsh -s /bin/zsh vagrant
+if [[ -x /bin/zsh ]]; then
+    chsh -s /bin/zsh root
+    chsh -s /bin/zsh vagrant
+fi
 
 #first_if=$($utils_path/list-eth-interfaces | head -n 1)
 #if [[ $? == 0 && -n $first_if ]]; then
