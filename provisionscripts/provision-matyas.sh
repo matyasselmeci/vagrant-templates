@@ -13,6 +13,11 @@ echo "set -o vi" > /etc/profile.d/input.sh
 
 pushd $utils_root
 git clone http://pages.cs.wisc.edu/~matyas/utils.git
+for script in mr vcsh; do
+    if wget http://pages.cs.wisc.edu/~matyas/$script; then
+        chmod +x $script
+    fi
+done
 popd
 
 cd ~
