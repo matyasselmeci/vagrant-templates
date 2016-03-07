@@ -29,11 +29,9 @@ fi
 # disable gpgcheck on all minefield repos
 sed -i 's/gpgcheck=1/gpgcheck=0/' /etc/yum.repos.d/osg-*minefield.repo
 
-yum install -d1 -y yum-priorities
-yum install -d1 -y deltarpm || :
-
 yum install --skip-broken -d1 -y \
     bash-completion \
+    deltarpm \
     emacs-nox \
     gdb \
     git \
@@ -49,8 +47,11 @@ yum install --skip-broken -d1 -y \
     sudo \
     tmux \
     vim-enhanced \
-    yum-utils \
-    yum-fastestmirror
+    yum-fastestmirror \
+    yum-priorities \
+    yum-utils
+
+rpm -q yum-priorities || { echo "yum-priorities not installed"; exit 1 }
 
 rm -f /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-Debug-7
 
