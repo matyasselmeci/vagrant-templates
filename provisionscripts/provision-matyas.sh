@@ -9,8 +9,6 @@ echo "export PATH=$utils_path:\$PATH" > /etc/profile.d/utils.sh
 echo "[ -d $utils_path/shellfn ] && for x in $utils_path/shellfn/*.sh; do . \$x || : ; done" >> /etc/profile.d/utils.sh
 echo "setenv PATH $utils_path:\$PATH" > /etc/profile.d/utils.csh
 
-echo "set -o vi" > /etc/profile.d/input.sh
-
 pushd $utils_root
 git clone http://pages.cs.wisc.edu/~matyas/utils.git
 for script in mr vcsh; do
