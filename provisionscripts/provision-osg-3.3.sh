@@ -51,8 +51,6 @@ yum install --skip-broken -d1 -y \
     yum-priorities \
     yum-utils
 
-rpm -q yum-priorities || { echo "yum-priorities not installed"; exit 1 }
-
 rm -f /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-Debug-7
 
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-* || :
