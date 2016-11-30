@@ -41,6 +41,8 @@
 
     - name: Install shell dotfiles
       command: /usr/local/share/newshell/install.sh {{ item }}
+      args:
+        creates: "{{ item }}/.zshrc"
       with_items:
         - /root
         - /home/vagrant
