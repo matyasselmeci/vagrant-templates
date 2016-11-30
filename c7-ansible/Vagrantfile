@@ -74,7 +74,7 @@ Vagrant.configure(2) do |config|
   config.vm.provision "shell", inline: <<-SHELL
     echo "$VMNAME$.vagrant" > /etc/hostname
     mkdir -p /etc/ansible
-    [[ -e /etc/ansible/hosts ]] || echo "localhost" > /etc/ansible/hosts
+    [[ -e /etc/ansible/hosts ]] || echo "localhost ansible_connection=local" > /etc/ansible/hosts
   SHELL
 
   config.vm.provision :ansible_local do |ans|
