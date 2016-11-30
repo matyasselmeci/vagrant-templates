@@ -3,9 +3,34 @@
   remote_user: root
   become: yes
   tasks:
-    - name: Install git and etckeeper
+    - name: Install epel7 repo
+      yum: name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm state=present
+
+    - name: Install helpful software
       yum: name={{ item }} state=present
       with_items:
-       - git
-       - etckeeper
+        - bash-completion
+        - emacs-nox
+        - gdb
+        - git
+        - git-svn
+        - make
+        - mc
+        - rcs
+        - subversion
+        - tmux
+        - vim-enhanced
+        - yum-utils
+        - yum-fastestmirror
+        - zsh
 
+    - name: Check out utils from my repo
+      git: repo=http://pages.cs.wisc.edu/~matyas/utils.git
+           dest=/usr/local/bin/utils
+
+    - name: Add utils to path
+      copy: src=files/utils.sh
+            dest=/etc/profile.d/utils.sh
+            owner=root
+            group=root
+            mode=644
