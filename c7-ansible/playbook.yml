@@ -53,4 +53,5 @@
         - root
         - vagrant
 
+- include: dns.yml
 
