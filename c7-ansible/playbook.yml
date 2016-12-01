@@ -3,10 +3,6 @@
   remote_user: root
   become: yes
 
-  tasks:
-    - include: ansible/matyas_tasks.yml
-    - include: ansible/dns_tasks.yml
-
-  handlers:
-    - include: ansible/dns_handlers.yml
-
+  roles:
+    - matyas
+    - dns
