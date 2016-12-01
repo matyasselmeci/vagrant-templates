@@ -25,7 +25,7 @@
        dest=/usr/local/bin/utils
 
 - name: Add utils to path
-  copy: src=files/utils.sh
+  copy: src=ansible/files/utils.sh
         dest=/etc/profile.d/utils.sh
         owner=root
         group=root

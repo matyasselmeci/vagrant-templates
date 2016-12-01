@@ -4,9 +4,9 @@
   become: yes
 
   tasks:
-    - include: matyas_tasks.yml
-    - include: dns_tasks.yml
+    - include: ansible/matyas_tasks.yml
+    - include: ansible/dns_tasks.yml
 
   handlers:
-    - include: dns_handlers.yml
+    - include: ansible/dns_handlers.yml
 
