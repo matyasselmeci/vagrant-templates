@@ -2,6 +2,7 @@
 
 utils_root=/usr/local/bin
 utils_path=$utils_root/utils
+newshell_path=/usr/local/share/newshell
 
 yum install -y -d1 git zsh
 
@@ -18,14 +19,9 @@ for script in mr vcsh; do
 done
 popd
 
-cd ~
-git clone http://pages.cs.wisc.edu/~matyas/newshell.git
-./newshell/install.sh ~
-
-cd ~vagrant
-git clone http://pages.cs.wisc.edu/~matyas/newshell.git
-./newshell/install.sh ~vagrant
-chown -R vagrant:vagrant ~vagrant
+git clone http://pages.cs.wisc.edu/~matyas/newshell.git $newshell_path
+$newshell_path/install.sh ~
+$newshell_path/install.sh ~vagrant
 
 if [[ -x /bin/zsh ]]; then
     chsh -s /bin/zsh root
