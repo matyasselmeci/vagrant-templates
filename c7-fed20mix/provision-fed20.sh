@@ -1,1 +1,1 @@
-../provisionscripts/provision-fed20.sh
+../_provision/scripts/provision-fed20.sh

@@ -1,1 +1,1 @@
-../provisionscripts/provision-epel7.sh
+../_provision/scripts/provision-epel7.sh

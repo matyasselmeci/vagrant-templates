@@ -1,1 +1,1 @@
-../provisionscripts/provision-matyas.sh
+../_provision/scripts/provision-matyas.sh
