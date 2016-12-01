@@ -2,56 +2,11 @@
 - hosts: 127.0.0.1
   remote_user: root
   become: yes
+
   tasks:
-    - name: Install epel repo
-      yum: name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm state=present
+    - include: matyas_tasks.yml
+    - include: dns_tasks.yml
 
-    - name: Install helpful software
-      yum: name={{ item }} state=present
-      with_items:
-        - bash-completion
-        - emacs-nox
-        - gdb
-        - git
-        - git-svn
-        - make
-        - mc
-        - rcs
-        - subversion
-        - tmux
-        - vim-enhanced
-        - yum-utils
-        - yum-fastestmirror
-        - zsh
-
-    - name: Check out utils from my repo
-      git: repo=http://pages.cs.wisc.edu/~matyas/utils.git
-           dest=/usr/local/bin/utils
-
-    - name: Add utils to path
-      copy: src=files/utils.sh
-            dest=/etc/profile.d/utils.sh
-            owner=root
-            group=root
-            mode=644
-
-    - name: Check out shell dotfiles
-      git: repo=http://pages.cs.wisc.edu/~matyas/newshell.git
-           dest=/usr/local/share/newshell
-
-    - name: Install shell dotfiles
-      command: /usr/local/share/newshell/install.sh {{ item }}
-      args:
-        creates: "{{ item }}/.zshrc"
-      with_items:
-        - /root
-        - /home/vagrant
-
-    - name: Use zsh
-      user: name={{ item }} shell=/bin/zsh
-      with_items:
-        - root
-        - vagrant
-
-- include: dns.yml
+  handlers:
+    - include: dns_handlers.yml
 
