@@ -1,0 +1,12 @@
+---
+- name: Install epel repo
+  yum: name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm  state=present
+
+- name: Install yum-plugin-priorities
+  yum: name=yum-plugin-priorities  state=present
+
+- name: Install osg repo
+  yum:
+    name: https://repo.grid.iu.edu/osg/{{ osgver }}/osg-{{ osgver }}-el{{ ansible_distribution_major_version }}-release-latest.rpm
+    state: present
+  notify: Clean yum cache
