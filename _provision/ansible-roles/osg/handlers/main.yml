@@ -1,3 +1,0 @@
-# no way to do this with the yum command - ignore the warning
-- name: Clean yum cache
-  command: yum clean expire-cache
