@@ -5,8 +5,24 @@
 - name: Install yum-plugin-priorities
   yum: name=yum-plugin-priorities  state=present
 
-- name: Install osg repo
-  yum:
-    name: https://repo.grid.iu.edu/osg/{{ osgver }}/osg-{{ osgver }}-el{{ ansible_distribution_major_version }}-release-latest.rpm
-    state: present
-  notify: Clean yum cache
+- name: Query version of osg-release
+  shell: "rpm -q --queryformat='%{VERSION}\n' osg-release || :"
+  args:
+    warn: False
+  register: osg_release_version
+  changed_when: False
+
+- name: Bootstrap osg-release
+  # Download osg-release from repo.grid.iu.edu if it's not installed or if it's
+  # the wrong version. This can't be done with the yum module because it
+  # doesn't handle the downgrading properly.
+
+  # rpm --force allows downgrading. Immediately clear the yum cache to keep yum
+  # from installing RPMs from the previous OSG repos if upgrading/downgrading
+  shell: "rpm -U --force {{ rpmpath }} && yum clean all && yum clean expire-cache"
+  args:
+    warn: False
+  when: osg_release_version.stdout != "{{ osgver }}"
+
+- name: Update osg-release
+  yum: name=osg-release  state=latest
