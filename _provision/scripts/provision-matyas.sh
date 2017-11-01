@@ -4,7 +4,7 @@ utils_root=/usr/local/bin
 utils_path=$utils_root/utils
 newshell_path=/usr/local/share/newshell
 
-yum install -y -d1 git zsh
+yum install -y -d1 git zsh wget
 
 echo "export PATH=$utils_path:\$PATH" > /etc/profile.d/utils.sh
 echo "[ -d $utils_path/shellfn ] && for x in $utils_path/shellfn/*.sh; do . \$x || : ; done" >> /etc/profile.d/utils.sh
