@@ -23,6 +23,9 @@ git clone http://pages.cs.wisc.edu/~matyas/newshell.git $newshell_path
 $newshell_path/install.sh ~
 $newshell_path/install.sh ~vagrant
 
+wget -nc -O ~/.screenrc http://pages.cs.wisc.edu/~matyas/screenrc
+wget -nc -O ~vagrant/.screenrc http://pages.cs.wisc.edu/~matyas/screenrc
+
 if [[ -x /bin/zsh ]]; then
     chsh -s /bin/zsh root
     chsh -s /bin/zsh vagrant
