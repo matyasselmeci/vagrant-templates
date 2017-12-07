@@ -73,7 +73,7 @@ Vagrant.configure(2) do |config|
     echo "$VMNAME$.vagrant" > /etc/hostname
   SHELL
 
-  config.vm.provision "shell", path: "provisionscripts/provision-osg-3.3.sh"
+  config.vm.provision "shell", path: "provisionscripts/provision-osg-3.4.sh"
   config.vm.provision "shell", path: "provisionscripts/provision-osg-build.sh"
   config.vm.provision "shell", path: "provisionscripts/provision-dns.sh"
   config.vm.provision "shell", path: "provisionscripts/provision-matyas.sh"
