@@ -15,7 +15,7 @@ enablerepo () {
 rhel=$(get_redhat_release)
 
 rpm -U https://dl.fedoraproject.org/pub/epel/epel-release-latest-${rhel}.noarch.rpm
-rpm -U http://repo.grid.iu.edu/osg/3.3/osg-3.3-el${rhel}-release-latest.rpm
+rpm -U http://repo.opensciencegrid.org/osg/3.3/osg-3.3-el${rhel}-release-latest.rpm
 
 # enable some repos
 enablerepo epel

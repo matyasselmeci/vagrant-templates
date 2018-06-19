@@ -1,2 +1,2 @@
 ---
-rpmpath: https://repo.grid.iu.edu/osg/{{ osgver }}/osg-{{ osgver }}-el{{ ansible_distribution_major_version }}-release-latest.rpm
+rpmpath: https://repo.opensciencegrid.org/osg/{{ osgver }}/osg-{{ osgver }}-el{{ ansible_distribution_major_version }}-release-latest.rpm

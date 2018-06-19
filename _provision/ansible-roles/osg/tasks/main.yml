@@ -13,7 +13,7 @@
   changed_when: False
 
 - name: Bootstrap osg-release
-  # Download osg-release from repo.grid.iu.edu if it's not installed or if it's
+  # Download osg-release from repo.opensciencegrid.org if it's not installed or if it's
   # the wrong version. This can't be done with the yum module because it
   # doesn't handle the downgrading properly.
 
