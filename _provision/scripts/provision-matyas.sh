@@ -12,11 +12,11 @@ echo "setenv PATH $utils_path:\$PATH" > /etc/profile.d/utils.csh
 
 pushd $utils_root
 git clone http://pages.cs.wisc.edu/~matyas/utils.git
-for script in mr vcsh; do
-    if wget http://pages.cs.wisc.edu/~matyas/$script; then
-        chmod +x $script
-    fi
-done
+#for script in mr vcsh; do
+#    if wget http://pages.cs.wisc.edu/~matyas/$script; then
+#        chmod +x $script
+#    fi
+#done
 popd
 
 git clone http://pages.cs.wisc.edu/~matyas/newshell.git $newshell_path
