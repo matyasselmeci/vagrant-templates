@@ -20,9 +20,8 @@
       - yum-fastestmirror
       - zsh
 
-# http repo was http://pages.cs.wisc.edu/~matyas/utils.git
 - name: Check out utils from my repo
-  git: repo=git://git.doit.wisc.edu/MATYAS/newutils.git
+  git: repo=http://pages.cs.wisc.edu/~matyas/utils.git
        dest=/usr/local/bin/utils
 
 - name: Add utils to path
@@ -32,9 +31,8 @@
         group=root
         mode=644
 
-# http repo was http://pages.cs.wisc.edu/~matyas/newshell.git
 - name: Check out shell dotfiles
-  git: repo=git://git.doit.wisc.edu/MATYAS/newshell.git
+  git: repo=http://pages.cs.wisc.edu/~matyas/newshell.git
        dest=/usr/local/share/newshell
 
 - name: Install shell dotfiles
