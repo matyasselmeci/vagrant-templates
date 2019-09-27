@@ -7,7 +7,6 @@
   yum:
     state: present
     name:
-      - emacs-nox
       - gdb
       - git
       - git-svn
