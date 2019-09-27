@@ -6,7 +6,6 @@
 - name: Install helpful software
   yum: name={{ item }} state=present
   with_items:
-    - bash-completion
     - emacs-nox
     - gdb
     - git
