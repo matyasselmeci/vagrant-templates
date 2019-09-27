@@ -22,7 +22,7 @@
   shell: "rpm -U --force {{ rpmpath }} && yum clean all && yum clean expire-cache"
   args:
     warn: False
-  when: osg_release_version.stdout != "{{ osgver }}"
+  when: osg_release_version.stdout != osgver
 
 - name: Update osg-release
   yum: name=osg-release  state=latest
