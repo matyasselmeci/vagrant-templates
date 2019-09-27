@@ -4,21 +4,22 @@
   when: ansible_distribution != "Fedora"
 
 - name: Install helpful software
-  yum: name={{ item }} state=present
-  with_items:
-    - emacs-nox
-    - gdb
-    - git
-    - git-svn
-    - make
-    - mc
-    - rcs
-    - subversion
-    - tmux
-    - vim-enhanced
-    - yum-utils
-    - yum-fastestmirror
-    - zsh
+  yum:
+    state: present
+    name:
+      - emacs-nox
+      - gdb
+      - git
+      - git-svn
+      - make
+      - mc
+      - rcs
+      - subversion
+      - tmux
+      - vim-enhanced
+      - yum-utils
+      - yum-fastestmirror
+      - zsh
 
 # http repo was http://pages.cs.wisc.edu/~matyas/utils.git
 - name: Check out utils from my repo
