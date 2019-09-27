@@ -1,0 +1,12 @@
+---
+- hosts: 127.0.0.1
+  remote_user: root
+  become: yes
+
+  vars:
+    osgver: 3.5
+
+  roles:
+    - matyas
+    - dns
+    - osg
