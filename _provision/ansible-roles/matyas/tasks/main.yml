@@ -1,6 +1,7 @@
 ---
 - name: Install epel repo
   yum: name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm state=present
+  when: ansible_distribution != "Fedora"
 
 - name: Install helpful software
   yum: name={{ item }} state=present
@@ -21,7 +22,8 @@
     - zsh
 
 - name: Check out utils from my repo
-  git: repo=http://pages.cs.wisc.edu/~matyas/utils.git
+  git: repo=https://git.doit.wisc.edu/MATYAS/newutils.git
+    # repo=http://pages.cs.wisc.edu/~matyas/utils.git
        dest=/usr/local/bin/utils
 
 - name: Add utils to path
@@ -32,7 +34,8 @@
         mode=644
 
 - name: Check out shell dotfiles
-  git: repo=http://pages.cs.wisc.edu/~matyas/newshell.git
+  git: repo=https://git.doit.wisc.edu/MATYAS/newshell.git
+    # repo=http://pages.cs.wisc.edu/~matyas/newshell.git
        dest=/usr/local/share/newshell
 
 - name: Install shell dotfiles
