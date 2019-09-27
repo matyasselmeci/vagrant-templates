@@ -11,7 +11,8 @@ echo "[ -d $utils_path/shellfn ] && for x in $utils_path/shellfn/*.sh; do . \$x 
 echo "setenv PATH $utils_path:\$PATH" > /etc/profile.d/utils.csh
 
 pushd $utils_root
-git clone http://pages.cs.wisc.edu/~matyas/utils.git
+#git clone http://pages.cs.wisc.edu/~matyas/utils.git
+git clone https://git.doit.wisc.edu/MATYAS/publicutils.git
 #for script in mr vcsh; do
 #    if wget http://pages.cs.wisc.edu/~matyas/$script; then
 #        chmod +x $script
@@ -19,7 +20,8 @@ git clone http://pages.cs.wisc.edu/~matyas/utils.git
 #done
 popd
 
-git clone http://pages.cs.wisc.edu/~matyas/newshell.git $newshell_path
+#git clone http://pages.cs.wisc.edu/~matyas/newshell.git $newshell_path
+git clone https://git.doit.wisc.edu/MATYAS/newshell.git $newshell_path
 $newshell_path/install.sh ~
 $newshell_path/install.sh ~vagrant
 
