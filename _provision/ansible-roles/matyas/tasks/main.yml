@@ -23,7 +23,7 @@
 
 # http repo was http://pages.cs.wisc.edu/~matyas/utils.git
 - name: Check out utils from my repo
-  git: repo=https://git.doit.wisc.edu/MATYAS/newutils.git
+  git: repo=git://git.doit.wisc.edu/MATYAS/newutils.git
        dest=/usr/local/bin/utils
 
 - name: Add utils to path
@@ -35,7 +35,7 @@
 
 # http repo was http://pages.cs.wisc.edu/~matyas/newshell.git
 - name: Check out shell dotfiles
-  git: repo=https://git.doit.wisc.edu/MATYAS/newshell.git
+  git: repo=git://git.doit.wisc.edu/MATYAS/newshell.git
        dest=/usr/local/share/newshell
 
 - name: Install shell dotfiles
