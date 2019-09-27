@@ -1,7 +1,7 @@
 #!/bin/bash
 
 utils_root=/usr/local/bin
-utils_path=$utils_root/utils
+utils_path=$utils_root/utils:$utils_root/utils/tiny
 newshell_path=/usr/local/share/newshell
 
 yum install -y -d1 git zsh wget
