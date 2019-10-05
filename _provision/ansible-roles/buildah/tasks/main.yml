@@ -1,0 +1,34 @@
+---
+- name: Install buildah, podman and required deps
+  yum:
+    state: latest
+    name:
+      - buildah
+      - podman
+      - podman-docker
+      - shadow-utils
+- name: Set user.max_user_namespaces
+  sysctl:
+    name: user.max_user_namespaces
+    value: "10000"
+    sysctl_set: true
+    state: present
+    reload: true
+
+# subuids/subgids: need 200 for centos:7 and centos:8 images
+# but there doesn't seem to be a limit so might as well use
+# 1000 (each user on my laptop uses 65k)
+# if you get lchown invalid argument errors, increase this,
+# log out, and log back in
+- name: Add subuids for vagrant
+  lineinfile:
+    path: /etc/subuid
+    regexp: '^vagrant:'
+    line: vagrant:10000:1000
+
+- name: Add subgids for vagrant
+  lineinfile:
+    path: /etc/subgid
+    regexp: '^vagrant:'
+    line: vagrant:10000:1000
+
