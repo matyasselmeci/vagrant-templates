@@ -1,8 +1,0 @@
-#!/bin/bash
-set -e
-vagrant up
-vagrant package --output ms-c7-ansible.box
-vagrant box add ms-c7-ansible ms-c7-ansible.box
-vagrant destroy
-rm -f ms-c7-ansible.box
-

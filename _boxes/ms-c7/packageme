@@ -1,0 +1,9 @@
+#!/bin/bash
+NAME=ms-c7
+set -e
+vagrant up
+vagrant package --output $NAME.box
+vagrant box add $NAME $NAME.box
+vagrant destroy
+rm -f $NAME.box
+
