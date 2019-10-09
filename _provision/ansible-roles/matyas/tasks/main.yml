@@ -12,16 +12,14 @@
       - git-svn
       - make
       - mc
-      - rcs
       - subversion
       - tmux
       - vim-enhanced
       - yum-utils
-      - yum-fastestmirror
       - zsh
 
 - name: Check out utils from my repo
-  git: repo=http://pages.cs.wisc.edu/~matyas/utils.git
+  git: repo=https://pages.cs.wisc.edu/~matyas/utils.git
        dest=/usr/local/bin/utils
 
 - name: Add utils to path
@@ -32,7 +30,7 @@
         mode=644
 
 - name: Check out shell dotfiles
-  git: repo=http://pages.cs.wisc.edu/~matyas/newshell.git
+  git: repo=https://pages.cs.wisc.edu/~matyas/newshell.git
        dest=/usr/local/share/newshell
 
 - name: Install shell dotfiles
