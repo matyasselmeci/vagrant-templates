@@ -22,7 +22,8 @@
   git:
     repo: https://pages.cs.wisc.edu/~matyas/utils.git
     dest: /usr/local/bin/utils
-    depth: 1
+    # http transport does not support `depth`
+    #depth: 1
 
 - name: Add utils to path
   copy:
@@ -36,7 +37,8 @@
   git:
     repo: https://pages.cs.wisc.edu/~matyas/newshell.git
     dest: /usr/local/share/newshell
-    depth: 1
+    # http transport does not support `depth`
+    #depth: 1
 
 - name: Install shell dotfiles
   command: /usr/local/share/newshell/install.sh {{ item }}
