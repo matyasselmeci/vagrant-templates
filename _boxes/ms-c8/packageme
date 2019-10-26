@@ -1,9 +1,0 @@
-#!/bin/bash
-NAME=ms-c8
-set -e
-vagrant up
-vagrant package --output $NAME.box
-vagrant box add --force $NAME $NAME.box
-vagrant destroy
-rm -f $NAME.box
-
