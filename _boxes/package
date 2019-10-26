@@ -1,11 +1,14 @@
 #!/bin/bash
-dir=${1?Usage: $0 <dir>}
-name=$(basename "$dir")
-set -e
-cd "$dir"
-vagrant up
-vagrant package --output "$name".box
-vagrant box add --force "$name" "$name".box
-vagrant destroy
-rm -f "$name".box
+for dir; do
+    name=$(basename "$dir")
+    (
+        set -e
+        cd "$dir"
+        vagrant up
+        vagrant package --output "$name".box
+        vagrant box add --force "$name" "$name".box
+        vagrant destroy --force
+        rm -f "$name".box
+    )
+done
 
