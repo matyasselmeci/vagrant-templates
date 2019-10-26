@@ -19,8 +19,10 @@
       - zsh
 
 - name: Check out utils from my repo
-  git: repo=https://pages.cs.wisc.edu/~matyas/utils.git
-       dest=/usr/local/bin/utils
+  git:
+    repo: https://pages.cs.wisc.edu/~matyas/utils.git
+    dest: /usr/local/bin/utils
+    depth: 1
 
 - name: Add utils to path
   copy: src=utils.sh
@@ -30,8 +32,10 @@
         mode=644
 
 - name: Check out shell dotfiles
-  git: repo=https://pages.cs.wisc.edu/~matyas/newshell.git
-       dest=/usr/local/share/newshell
+  git:
+    repo: https://pages.cs.wisc.edu/~matyas/newshell.git
+    dest: /usr/local/share/newshell
+    depth: 1
 
 - name: Install shell dotfiles
   command: /usr/local/share/newshell/install.sh {{ item }}
