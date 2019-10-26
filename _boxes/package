@@ -4,6 +4,7 @@ for dir; do
     (
         set -e
         cd "$dir"
+        vagrant box update
         vagrant up
         vagrant package --output "$name".box
         vagrant box add --force "$name" "$name".box
