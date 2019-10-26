@@ -25,11 +25,12 @@
     depth: 1
 
 - name: Add utils to path
-  copy: src=utils.sh
-        dest=/etc/profile.d/utils.sh
-        owner=root
-        group=root
-        mode=644
+  copy:
+    src: utils.sh
+    dest: /etc/profile.d/utils.sh
+    owner: root
+    group: root
+    mode: 644
 
 - name: Check out shell dotfiles
   git:
