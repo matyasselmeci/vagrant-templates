@@ -18,12 +18,20 @@
       - yum-utils
       - zsh
 
-- name: Check out utils from my repo
-  git:
-    repo: https://pages.cs.wisc.edu/~matyas/utils.git
+- file:
+    state: directory
+    path: /usr/local/bin/utils
+    owner: root
+    group: root
+    mode: "755"
+
+- name: Download my utils
+  unarchive:
+    src: https://git.doit.wisc.edu/MATYAS/publicutils/-/archive/master/publicutils-master.tar.gz
     dest: /usr/local/bin/utils
-    # http transport does not support `depth`
-    #depth: 1
+    remote_src: yes
+    extra_opts:
+      - --strip-components=1
 
 - name: Add utils to path
   copy:
@@ -31,14 +39,22 @@
     dest: /etc/profile.d/utils.sh
     owner: root
     group: root
-    mode: 644
+    mode: "644"
 
-- name: Check out shell dotfiles
-  git:
-    repo: https://pages.cs.wisc.edu/~matyas/newshell.git
+- file:
+    state: directory
+    path: /usr/local/share/newshell
+    owner: root
+    group: root
+    mode: "755"
+
+- name: Download my shell dotfiles
+  unarchive:
+    src: https://git.doit.wisc.edu/MATYAS/newshell/-/archive/master/newshell-master.tar.gz
     dest: /usr/local/share/newshell
-    # http transport does not support `depth`
-    #depth: 1
+    remote_src: yes
+    extra_opts:
+      - --strip-components=1
 
 - name: Install shell dotfiles
   command: /usr/local/share/newshell/install.sh {{ item }}
