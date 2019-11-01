@@ -1,5 +1,6 @@
 #!/bin/bash
 for dir; do
+    [[ -d $dir ]] || continue
     name=$(basename "$dir")
     (
         set -e
