@@ -1,9 +1,17 @@
 ---
 #- name: Install epel repo
-  #yum: name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm  state=present
+#  yum: name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm  state=present
 
 #- name: Install yum-plugin-priorities
-  #yum: name=yum-plugin-priorities  state=present
+#  yum: name=yum-plugin-priorities  state=present
+
+- name: Enable PowerTools
+  ini_file:
+    path: /etc/yum.repos.d/CentOS-PowerTools.repo
+    section: PowerTools
+    option: enabled
+    value: "1"
+  when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "8"
 
 - name: Add Condor repository
   yum_repository:
