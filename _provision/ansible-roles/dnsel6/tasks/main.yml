@@ -13,12 +13,18 @@
     regexp: "^{{ ansible_default_ipv4.address }}"
     line: "{{ ansible_default_ipv4.address }}  {{ ansible_fqdn }}"
 
-# EL 7+: NetworkManager handles DNS - if it's configured to use dnsmasq,
-# NetworkManager will start it up for us
-- name: configure NetworkManager
-  ini_file: dest=/etc/NetworkManager/NetworkManager.conf
-            section=main
-            option=dns
-            value=dnsmasq
-  notify: restart NetworkManager
+- name: start dnsmasq
+  service:
+    name: dnsmasq
+    enabled: yes
+    state: started
+
+- name: configure dhclient
+  lineinfile:
+    dest: /etc/dhclient.conf
+    line: "prepend domain-name-servers 127.0.0.1;"
+    create: yes
+
+- name: run dhclient
+  command: dhclient
 
