@@ -1,6 +1,6 @@
 #!/bin/sh
 if command -v ionice >&/dev/null; then
-  exec ionice -c idle nice ./package ./*/
+  exec ionice -c idle nice make add-all
 else
-  exec nice ./package ./*/
+  exec nice make add-all
 fi
