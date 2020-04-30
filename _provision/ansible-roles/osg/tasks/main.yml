@@ -9,7 +9,7 @@
     option: "enable"
     value: "1"
   when: ansible_distribution_major_version == "8" and ansible_distribution == "CentOS"
-  with_items:
+  with_list:
     - ["CentOS-AppStream", "AppStream"]
     - ["CentOS-PowerTools", "PowerTools"]
     - ["CentOS-Extras", "extras"]
