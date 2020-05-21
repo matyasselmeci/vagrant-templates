@@ -79,7 +79,7 @@ Vagrant.configure(2) do |config|
   #   sudo apt-get install -y apache2
   # SHELL
   config.vm.provision "shell", inline: <<-SHELL
-    echo "$VMNAME$.vagrant" > /etc/hostname
+    echo "$VMNAME$.example.net" > /etc/hostname
   SHELL
 end
 
