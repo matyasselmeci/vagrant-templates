@@ -39,3 +39,15 @@
 
 - name: Update osg-release
   yum: name=osg-release  state=latest
+
+- name: Add my repos
+  yum_repository:
+    name: matyas
+    description: My yum repo
+    baseurl: "https://pages.cs.wisc.edu/~matyas/yum/el{{ansible_distribution_major_version}}"
+    gpgcheck: no
+    enable: no
+    priority: 2
+    keepcache: 0
+    metadata_expire: 60
+  when: ansible_distribution in ["CentOS", "Red Hat Enterprise Linux", "Scientific"]
