@@ -46,7 +46,7 @@
     description: My yum repo
     baseurl: "https://pages.cs.wisc.edu/~matyas/yum/el{{ansible_distribution_major_version}}"
     gpgcheck: no
-    enable: no
+    enabled: no
     priority: 2
     keepcache: 0
     metadata_expire: 60
