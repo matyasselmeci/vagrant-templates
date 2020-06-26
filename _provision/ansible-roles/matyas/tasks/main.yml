@@ -38,6 +38,7 @@
     name:
       - vim-enhanced
       - yum-utils
+      - libselinux-python
   when: ansible_os_family == "RedHat"
 
 - file:
