@@ -47,7 +47,7 @@
     baseurl: "https://pages.cs.wisc.edu/~matyas/yum/el{{ansible_distribution_major_version}}"
     gpgcheck: no
     enabled: no
-    priority: 2
-    keepcache: 0
-    metadata_expire: 60
+    priority: "2"
+    keepcache: "0"
+    metadata_expire: "60"
   when: ansible_distribution in ["CentOS", "Red Hat Enterprise Linux", "Scientific"]
