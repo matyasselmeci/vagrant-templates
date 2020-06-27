@@ -38,8 +38,14 @@
     name:
       - vim-enhanced
       - yum-utils
-      - libselinux-python
   when: ansible_os_family == "RedHat"
+
+- name: Install libselinux-python
+  yum:
+    state: present
+    name:
+      - libselinux-python
+  when: ansible_os_family == "RedHat" and ansible_distribution_major_version == "6"
 
 - file:
     state: directory
