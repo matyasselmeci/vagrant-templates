@@ -40,6 +40,12 @@
 - name: Update osg-release
   yum: name=osg-release  state=latest
 
+- name: Add mock group
+  group: name=mock
+
+- name: Add vagrant user to mock group
+  user: name=vagrant  groups=mock,vagrant
+
 - name: Add my repos
   yum_repository:
     name: matyas
