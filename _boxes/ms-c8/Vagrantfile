@@ -63,8 +63,6 @@ Vagrant.configure(2) do |config|
     mkdir -p /etc/ansible
     [[ -e /etc/ansible/hosts ]] || \
       echo "localhost ansible_connection=local" > /etc/ansible/hosts
-    [[ -e /etc/yum.repos.d/matyas-ansible-el8.repo ]] || \
-      curl -LsS -o /etc/yum.repos.d/matyas-ansible-el8.repo https://pages.cs.wisc.edu/~matyas/yum/matyas-ansible-el8.repo
   SHELL
 
   config.vm.provision :ansible_local do |ans|
