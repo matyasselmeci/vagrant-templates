@@ -6,7 +6,7 @@
   ini_file:
     path: "/etc/yum.repos.d/{{ item[0] }}.repo"
     section: "{{ item[1] }}"
-    option: "enable"
+    option: "enabled"
     value: "1"
   when: ansible_distribution_major_version == "8" and ansible_distribution == "CentOS"
   with_list:
