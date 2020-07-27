@@ -1,0 +1,10 @@
+---
+- hosts: 127.0.0.1
+  remote_user: root
+  become: yes
+
+  roles:
+    - role: dns
+    - role: osg
+      vars:
+        osgver: 3.5
