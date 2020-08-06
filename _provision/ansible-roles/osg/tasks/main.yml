@@ -32,7 +32,7 @@
 
   # rpm --force allows downgrading. Immediately clear the yum cache to keep yum
   # from installing RPMs from the previous OSG repos if upgrading/downgrading
-  shell: "rpm -U --force {{ rpmpath }} && yum clean all"
+  shell: "rpm -U --force {{ rpmpath|quote }} && yum clean all"
   args:
     warn: False
   when: osg_release_version.stdout != osgver|string
