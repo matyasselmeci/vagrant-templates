@@ -8,4 +8,4 @@
     - role: dns
     - role: osg
       vars:
-        osgver: 3.5
+        osgver: "3.5"
