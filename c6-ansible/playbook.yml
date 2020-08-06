@@ -4,6 +4,8 @@
   become: yes
 
   roles:
-    - matyas
-    - dnsel6
-    - osg
+    - role: matyas
+    - role: dnsel6
+    - role: osg
+      vars:
+        osgver: "3.4"
