@@ -1,0 +1,23 @@
+---
+- name: Add docker-ce-stable yum repo
+  yum_repository:
+    name: docker-ce-stable
+    description: Docker CE Stable
+    baseurl: https://download.docker.com/linux/centos/7/x86_64/stable
+    # ^ apparently it's centos 7 only; maybe that version works on 8 too
+    gpgkey: "https://download.docker.com/linux/centos/gpg"
+    gpgcheck: 1
+
+- name: Install docker
+  yum:
+    state: latest
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - docker-compose
+
+- name: Add docker group
+  group: name=docker
+
+- name: Add vagrant user to docker group
+  user: name=vagrant  groups=docker  append=yes
