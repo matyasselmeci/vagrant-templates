@@ -50,7 +50,7 @@
   group: name=mock
 
 - name: Add vagrant user to mock group
-  user: name=vagrant  groups=mock,vagrant
+  user: name=vagrant  groups=mock  append=yes
 
 - name: Add my repos
   yum_repository:
