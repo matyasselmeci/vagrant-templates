@@ -21,3 +21,9 @@
 
 - name: Add vagrant user to docker group
   user: name=vagrant  groups=docker  append=yes
+
+- name: Enable and start docker
+  service:
+    name: docker
+    enabled: yes
+    state: started
