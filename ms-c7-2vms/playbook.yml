@@ -3,7 +3,7 @@
   remote_user: root
   become: yes
 
-  roles:
-    - role: matyas
-    - role: dns
+  # roles:
+  #   - role: matyas
+  #   - role: dns
 
