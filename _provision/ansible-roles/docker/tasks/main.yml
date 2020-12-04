@@ -3,8 +3,7 @@
   yum_repository:
     name: docker-ce-stable
     description: Docker CE Stable
-    baseurl: https://download.docker.com/linux/centos/7/x86_64/stable
-    # ^ apparently it's centos 7 only; maybe that version works on 8 too
+    baseurl: https://download.docker.com/linux/centos/$releasever/x86_64/stable
     gpgkey: "https://download.docker.com/linux/centos/gpg"
     gpgcheck: 1
 
