@@ -5,13 +5,21 @@
 #- name: Install yum-plugin-priorities
 #  yum: name=yum-plugin-priorities  state=present
 
-- name: Enable PowerTools
+- name: Enable PowerTools (8.2 or lower)
   ini_file:
     path: /etc/yum.repos.d/CentOS-PowerTools.repo
     section: PowerTools
     option: enabled
     value: "1"
-  when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "8"
+  when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "8" and ansible_distribution_version < "8.3"
+
+- name: Enable PowerTools (8.3 and up)
+  ini_file:
+    path: /etc/yum.repos.d/CentOS-Linux-PowerTools.repo
+    section: powertools
+    option: enabled
+    value: "1"
+  when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "8" and ansible_distribution_version >= "8.3"
 
 - name: Add Condor repository
   yum_repository:
