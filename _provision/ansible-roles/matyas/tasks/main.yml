@@ -13,19 +13,19 @@
     section: "{{ item[1] }}"
     option: "enabled"
     value: "1"
-  when: ansible_distribution_major_version == "8" and ansible_distribution == "CentOS" and ansible_distribution_version < "8.3"
+  when: ansible_distribution_major_version == "8" and ansible_distribution == "CentOS" and ansible_distribution_release != "NA" and ansible_distribution_version < "8.3"
   with_list:
     - ["CentOS-AppStream", "AppStream"]
     - ["CentOS-PowerTools", "PowerTools"]
     - ["CentOS-Extras", "extras"]
 
-- name: Maybe enable extra CentOS 8 repos (8.3 and up)
+- name: Maybe enable extra CentOS 8 repos (8.3 and up, and 8-stream)
   ini_file:
     path: "/etc/yum.repos.d/{{ item[0] }}.repo"
     section: "{{ item[1] }}"
     option: "enabled"
     value: "1"
-  when: ansible_distribution_major_version == "8" and ansible_distribution == "CentOS" and ansible_distribution_version >= "8.3"
+  when: ansible_distribution_major_version == "8" and ansible_distribution == "CentOS" and (ansible_distribution_version >= "8.3" or ansible_distribution_release == "NA")
   with_list:
     - ["CentOS-Linux-AppStream", "appstream"]
     - ["CentOS-Linux-PowerTools", "powertools"]
