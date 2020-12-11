@@ -1,55 +1,7 @@
 ---
 #- when: ansible_distribution in ["CentOS", "Red Hat Enterprise Linux", "Scientific"]
-- name: Set up EL repos
-  when: ansible_os_family == "RedHat"
-  block:
-    - name: Install epel repo
-      yum: name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm state=present
-
-    - name: Maybe install yum-plugin-priorities
-      yum: name=yum-plugin-priorities state=present
-      when: ansible_distribution_major_version|int < 8
-
-    - name: CentOS 8 repos
-      when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "8"
-      block:
-
-        - name: Repos for 8.2 or lower
-          when: ansible_distribution_release != "NA" and ansible_distribution_version|float < 8.3
-          ini_file:
-            path: "/etc/yum.repos.d/{{ item[0] }}.repo"
-            section: "{{ item[1] }}"
-            option: "enabled"
-            value: "1"
-          with_list:
-            - ["CentOS-AppStream", "AppStream"]
-            - ["CentOS-PowerTools", "PowerTools"]
-            - ["CentOS-Extras", "extras"]
-
-        - name: Repos for 8.3 and up
-          when: ansible_distribution_release != "NA" and ansible_distribution_version|float >= 8.3
-          ini_file:
-            path: "/etc/yum.repos.d/{{ item[0] }}.repo"
-            section: "{{ item[1] }}"
-            option: "enabled"
-            value: "1"
-          with_list:
-            - ["CentOS-Linux-AppStream", "appstream"]
-            - ["CentOS-Linux-PowerTools", "powertools"]
-            - ["CentOS-Linux-Extras", "extras"]
-
-        - name: Repos for Stream
-          when: ansible_distribution_release == "NA"
-          ini_file:
-            path: "/etc/yum.repos.d/{{ item[0] }}.repo"
-            section: "{{ item[1] }}"
-            option: "enabled"
-            value: "1"
-          with_list:
-            - ["CentOS-Stream-AppStream", "appstream"]
-            - ["CentOS-Stream-PowerTools", "powertools"]
-            - ["CentOS-Stream-Extras", "extras"]
-
+- when: ansible_os_family == "RedHat"
+  include_role: name=rhel
 
 - name: Install common helpful software
   package:
