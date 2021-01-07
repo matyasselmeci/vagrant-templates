@@ -10,20 +10,28 @@
   when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "8"
   block:
 
+    - name: Query version of centos-stream-repos
+      shell: "rpm -q --queryformat='%{VERSION}\n' centos-stream-repos || :"
+      args:
+        warn: False
+      register: centos_stream_repos_version
+      changed_when: False
+
     - name: Repos for Stream
-      when: ansible_distribution_release == "NA"
+      when: centos_stream_repos_version.stdout|int > 0
       ini_file:
         path: "/etc/yum.repos.d/{{ item[0] }}.repo"
         section: "{{ item[1] }}"
         option: "enabled"
         value: "1"
+        create: no
       with_list:
         - ["CentOS-Stream-AppStream", "appstream"]
         - ["CentOS-Stream-PowerTools", "powertools"]
         - ["CentOS-Stream-Extras", "extras"]
 
     - name: Repos for not Stream
-      when: ansible_distribution_release != "NA"
+      when: not centos_stream_repos_version.stdout|int > 0
       block:
 
         - name: Repos for 8.2 or lower
@@ -33,6 +41,7 @@
             section: "{{ item[1] }}"
             option: "enabled"
             value: "1"
+            create: no
           with_list:
             - ["CentOS-AppStream", "AppStream"]
             - ["CentOS-PowerTools", "PowerTools"]
@@ -45,6 +54,7 @@
             section: "{{ item[1] }}"
             option: "enabled"
             value: "1"
+            create: no
           with_list:
             - ["CentOS-Linux-AppStream", "appstream"]
             - ["CentOS-Linux-PowerTools", "powertools"]
