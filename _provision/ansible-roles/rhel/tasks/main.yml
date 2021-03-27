@@ -1,6 +1,11 @@
 ---
-- name: Install epel repo
+- name: Install epel repo (not Amazon)
   yum: name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm state=present
+  when: ansible_distribution != "Amazon"
+
+- name: Install epel7 repo (Amazon2)
+  yum: name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm state=present
+  when: ansible_distribution == "Amazon" and ansible_distribution_major_version == "2"
 
 - name: Maybe install yum-plugin-priorities
   yum: name=yum-plugin-priorities state=present
