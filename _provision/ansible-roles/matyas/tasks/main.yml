@@ -81,7 +81,7 @@
     - /home/vagrant
 
 - name: Fix home dir permissions of vagrant user
-  shell: "chmod -R vagrant: ~vagrant"
+  shell: "chown -R vagrant: ~vagrant"
 
 - name: Use zsh
   user: name={{ item }} shell=/bin/zsh
