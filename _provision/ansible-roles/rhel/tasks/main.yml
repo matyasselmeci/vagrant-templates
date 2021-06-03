@@ -11,6 +11,31 @@
   yum: name=yum-plugin-priorities state=present
   when: ansible_distribution_major_version|int < 8
 
+- name: User namespaces on CentOS 7
+  when: ansible_distribution_major_version|int < 8
+  block:
+
+    - name: Set user.max_user_namespaces
+      sysctl:
+        name: user.max_user_namespaces
+        value: "10000"
+        sysctl_set: true
+        state: present
+        reload: true
+
+    - name: Add subuids for vagrant
+      lineinfile:
+        path: /etc/subuid
+        regexp: '^vagrant:'
+        line: vagrant:100000:65536
+
+    - name: Add subgids for vagrant
+      lineinfile:
+        path: /etc/subgid
+        regexp: '^vagrant:'
+        line: vagrant:100000:65536
+
+
 - name: CentOS 8 repos
   when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "8"
   block:
