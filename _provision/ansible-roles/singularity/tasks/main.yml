@@ -1,0 +1,6 @@
+---
+- name: Install singularity
+  yum:
+    state: latest
+    name:
+      - singularity
