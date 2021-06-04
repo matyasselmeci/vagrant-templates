@@ -11,6 +11,9 @@
   yum: name=yum-plugin-priorities state=present
   when: ansible_distribution_major_version|int < 8
 
+- name: Install shadow-utils
+  yum: name=shadow-utils state=latest
+
 - name: User namespaces on CentOS 7
   when: ansible_distribution_major_version|int < 8
   block:
