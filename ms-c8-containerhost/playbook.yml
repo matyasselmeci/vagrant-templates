@@ -1,0 +1,11 @@
+---
+- hosts: 127.0.0.1
+  remote_user: root
+  become: yes
+
+  roles:
+    # - role: matyas
+    # - role: dns
+    - role: buildah
+    - role: docker
+    - role: singularity
