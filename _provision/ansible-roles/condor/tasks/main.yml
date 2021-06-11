@@ -1,9 +1,7 @@
 ---
+## Disabled: EPEL is generally already installed by this point
 #- name: Install epel repo
 #  yum: name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm  state=present
-
-#- name: Install yum-plugin-priorities
-#  yum: name=yum-plugin-priorities  state=present
 
 - name: Enable PowerTools (8.2 or lower)
   ini_file:
@@ -21,18 +19,16 @@
     value: "1"
   when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "8" and ansible_distribution_version >= "8.3"
 
-- name: Add Condor repository
-  yum_repository:
-      name: htcondor
-      description: Condor {{series}} repository
-      gpgkey: "https://research.cs.wisc.edu/htcondor/yum/RPM-GPG-KEY-HTCondor"
-      baseurl: "https://research.cs.wisc.edu/htcondor/yum/{{ series }}/rhel{{ ansible_distribution_major_version }}"
-      gpgcheck: 1
-      priority: "90"
-
-
-- name: Install Condor
+- name: Install HTCondor repositories (non-Amazon)
+  yum: name=https://research.cs.wisc.edu/htcondor/repo/{{ series }}/htcondor-release-current.el{{ ansible_distribution_major_version }}.noarch.rpm state=present
+  when: ansible_distribution != "Amazon"
+  
+- name: Install HTCondor repositories (Amazon)
+  yum: name=https://research.cs.wisc.edu/htcondor/repo/{{ series }}/htcondor-release-current.el7.noarch.rpm state=present
+  when: ansible_distribution == "Amazon" and ansible_distribution_major_version == "2"
+  
+- name: Install MiniCondor
   yum:
-      name: condor
+      name: minicondor
       state: latest
 
