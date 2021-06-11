@@ -20,11 +20,17 @@
   when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "8" and ansible_distribution_version >= "8.3"
 
 - name: Install HTCondor repositories (non-Amazon)
-  yum: name=https://research.cs.wisc.edu/htcondor/repo/{{ series }}/htcondor-release-current.el{{ ansible_distribution_major_version }}.noarch.rpm state=present
+  yum:
+    name: https://research.cs.wisc.edu/htcondor/repo/{{ series }}/htcondor-release-current.el{{ ansible_distribution_major_version }}.noarch.rpm
+    state: present
+    disable_gpg_check: yes
   when: ansible_distribution != "Amazon"
   
 - name: Install HTCondor repositories (Amazon)
-  yum: name=https://research.cs.wisc.edu/htcondor/repo/{{ series }}/htcondor-release-current.el7.noarch.rpm state=present
+  yum:
+    name: https://research.cs.wisc.edu/htcondor/repo/{{ series }}/htcondor-release-current.el7.noarch.rpm
+    state: present
+    disable_gpg_check: yes
   when: ansible_distribution == "Amazon" and ansible_distribution_major_version == "2"
   
 - name: Install MiniCondor
