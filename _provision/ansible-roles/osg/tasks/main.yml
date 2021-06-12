@@ -24,7 +24,7 @@
   yum: name=osg-release  state=latest
 
 - name: Import signing key(s)
-  command: rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG*
+  shell: "rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG*"
   args:
     warn: False
   changed_when: False
