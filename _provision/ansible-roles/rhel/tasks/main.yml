@@ -38,5 +38,19 @@
         regexp: '^vagrant:'
         line: vagrant:100000:65536
 
+- name: ntpdate on CentOS 7
+  when: ansible_distribution_major_version == "7"
+  block:
+    - name: Install ntpdate
+      yum:
+        name: ntpdate
+        state: present
+
+    - name: Enable ntpdate
+      service:
+        name: ntpdate
+        enabled: yes
+        state: started
+
 - import_tasks: 8.yml
   when: ansible_distribution_major_version == "8"
