@@ -6,6 +6,6 @@
   roles:
     # - role: matyas
     # - role: dns
-    - role: buildah
+    # - role: buildah
     - role: docker
     - role: singularity
