@@ -5,7 +5,7 @@
     name:
       - buildah
       - podman
-      - podman-docker
+      # - podman-docker
       - shadow-utils
 #- name: Set user.max_user_namespaces
 #  sysctl:
