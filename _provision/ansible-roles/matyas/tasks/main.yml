@@ -96,6 +96,7 @@
   get_url:
     url: https://pages.cs.wisc.edu/~matyas/tmux.conf
     dest: /etc/tmux.conf
+    validate_certs: "{{ ansible_distribution_major_version == '7' | ternary('no', 'yes') }}"
 
 - name: Fix home dir permissions of vagrant user
   shell:
