@@ -94,7 +94,7 @@
 
 - name: Download tmuxrc
   get_url:
-    url: http://pages.cs.wisc.edu/~matyas/tmux.conf
+    url: https://pages.cs.wisc.edu/~matyas/tmux.conf
     dest: /etc/tmux.conf
 
 - name: Fix home dir permissions of vagrant user
