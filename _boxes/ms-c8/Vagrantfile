@@ -67,7 +67,7 @@ Vagrant.configure(2) do |config|
   SHELL
 
   config.vm.provision "shell", inline: <<-SHELL
-    yum -y -d1 distro-sync
+    yum -y -d1 distro-sync --exclude=\*kernel\* --exclude=\*firmware\*
   SHELL
 
   config.vm.provision :ansible_local do |ans|
