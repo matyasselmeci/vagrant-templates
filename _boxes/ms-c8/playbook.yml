@@ -4,5 +4,5 @@
   become: yes
 
   roles:
-    - matyas
-    - dns
+    - matyas-qualified
+    - dns-qualified

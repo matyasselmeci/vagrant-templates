@@ -65,10 +65,12 @@ Vagrant.configure(2) do |config|
     mkdir -p /etc/ansible
     [[ -e /etc/ansible/hosts ]] || \
       echo "localhost ansible_connection=local" > /etc/ansible/hosts
+    yum -y -d1 install epel-release centos-release-ansible-29
+    yum -y -d1 install ansible-collection-ansible-posix ansible-collection-community-general --exclude=ansible-core
   SHELL
 
   config.vm.provision "shell", inline: <<-SHELL
-    yum -y -d1 distro-sync --exclude=\*kernel\* --exclude=\*firmware\*
+    yum -y -d1 distro-sync --exclude=\*kernel\* --exclude=\*firmware\* --exclude=ansible-core
   SHELL
 
   config.vm.provision :ansible_local do |ans|
