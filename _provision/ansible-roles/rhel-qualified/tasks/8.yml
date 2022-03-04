@@ -22,35 +22,6 @@
         - ["CentOS-Stream-PowerTools", "powertools"]
         - ["CentOS-Stream-Extras", "extras"]
 
-    - name: Repos for not Stream
-      when: not centos_stream_repos_version.stdout|int > 0
-      block:
-
-        - name: Repos for 8.2 or lower
-          when: ansible_distribution_version|float < 8.3
-          community.general.ini_file:
-            path: "/etc/yum.repos.d/{{ item[0] }}.repo"
-            section: "{{ item[1] }}"
-            option: "enabled"
-            value: "1"
-            create: no
-          with_list:
-            - ["CentOS-AppStream", "AppStream"]
-            - ["CentOS-PowerTools", "PowerTools"]
-            - ["CentOS-Extras", "extras"]
-
-        - name: Repos for 8.3 and up
-          when: ansible_distribution_version|float >= 8.3
-          community.general.ini_file:
-            path: "/etc/yum.repos.d/{{ item[0] }}.repo"
-            section: "{{ item[1] }}"
-            option: "enabled"
-            value: "1"
-            create: no
-          with_list:
-            - ["CentOS-Linux-AppStream", "appstream"]
-            - ["CentOS-Linux-PowerTools", "powertools"]
-            - ["CentOS-Linux-Extras", "extras"]
 
 - name: Rocky
   when: ansible_distribution == "Rocky"
