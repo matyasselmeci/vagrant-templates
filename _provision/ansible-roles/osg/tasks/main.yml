@@ -1,12 +1,13 @@
 ---
-- include_role: name=rhel
+- name: include rhel
+  include_role: name=rhel
 
 - name: Query version of osg-release
   shell: "rpm -q --queryformat='%{VERSION}\n' osg-release || :"
   args:
-    warn: False
+    warn: false
   register: osg_release_version
-  changed_when: False
+  changed_when: false
 
 - name: Bootstrap osg-release
   # Download osg-release from repo.opensciencegrid.org if it's not installed or if it's
@@ -17,7 +18,7 @@
   # from installing RPMs from the previous OSG repos if upgrading/downgrading
   shell: "rpm -U --force {{ rpmpath|quote }} && yum clean all"
   args:
-    warn: False
+    warn: false
   when: osg_release_version.stdout != osgver|string
 
 - name: Update osg-release
@@ -26,8 +27,8 @@
 - name: Import signing key(s)
   shell: "rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG*"
   args:
-    warn: False
-  changed_when: False
+    warn: false
+  changed_when: false
 
 - name: Add mock group
   group: name=mock
@@ -40,8 +41,8 @@
     name: matyas
     description: My yum repo
     baseurl: "https://pages.cs.wisc.edu/~matyas/yum/el{{ ansible_distribution_major_version }}"
-    gpgcheck: no
-    enabled: no
+    gpgcheck: false
+    enabled: false
     priority: "2"
     keepcache: "0"
     metadata_expire: "60"
@@ -55,9 +56,10 @@
 
 - name: Download osg-ca-generator with git
   git:
+    version: "master"
     repo: 'https://github.com/opensciencegrid/osg-ca-generator'
     dest: /usr/local/src/osg-ca-generator
-    accept_hostkey: yes
+    accept_hostkey: true
 
 - name: Install osg-ca-generator
   make:
