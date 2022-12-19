@@ -60,4 +60,6 @@
     accept_hostkey: yes
 
 - name: Install osg-ca-generator
-  shell: "cd /usr/local/share/osg-ca-generator && make install"
+  make:
+    chdir: '/usr/local/share/osg-ca-generator'
+    target: 'install'
