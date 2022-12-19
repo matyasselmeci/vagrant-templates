@@ -1,0 +1,2 @@
+#!/bin/sh
+exec osg-ca-generator --expire-days 100 --host --vo osgtest --crl

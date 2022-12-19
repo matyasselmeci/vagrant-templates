@@ -63,3 +63,11 @@
   make:
     chdir: '/usr/local/share/osg-ca-generator'
     target: 'install'
+
+- name: Add run-cagen
+  copy:
+    src: run-cagen
+    dest: /usr/local/bin/run-cagen
+    owner: root
+    group: root
+    mode: "755"
