@@ -56,12 +56,12 @@
 - name: Download osg-ca-generator with git
   git:
     repo: 'https://github.com/opensciencegrid/osg-ca-generator'
-    dest: /usr/local/share/osg-ca-generator
+    dest: /usr/local/src/osg-ca-generator
     accept_hostkey: yes
 
 - name: Install osg-ca-generator
   make:
-    chdir: '/usr/local/share/osg-ca-generator'
+    chdir: '/usr/local/src/osg-ca-generator'
     target: 'install'
 
 - name: Add run-cagen
