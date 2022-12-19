@@ -45,3 +45,19 @@
     priority: "2"
     keepcache: "0"
     metadata_expire: "60"
+
+- name: Install Python3 and Make
+  yum:
+    state: present
+    name:
+      - python3
+      - make
+
+- name: Download osg-ca-generator with git
+  git:
+    repo: 'https://github.com/opensciencegrid/osg-ca-generator'
+    dest: /usr/local/share/osg-ca-generator
+    accept_hostkey: yes
+
+- name: Install osg-ca-generator
+  shell: "cd /usr/local/share/osg-ca-generator && make install"
