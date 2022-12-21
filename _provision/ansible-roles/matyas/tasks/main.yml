@@ -27,28 +27,12 @@
       - yum-utils
   when: ansible_os_family in ["RedHat", "Rocky"]
 
-- name: Install libselinux-python
-  yum:
-    state: present
-    name:
-      - libselinux-python
-  when: ansible_os_family == "RedHat" and ansible_distribution_major_version == "6"
-
 - file:
     state: directory
     path: /usr/local/bin/utils
     owner: root
     group: root
     mode: "755"
-
-#- name: Download my utils
-#  unarchive:
-#    src: https://git.doit.wisc.edu/MATYAS/publicutils/-/archive/master/publicutils-master.tar.gz
-#    dest: /usr/local/bin/utils
-#    remote_src: yes
-#    validate_certs: "{{ ansible_distribution_major_version == '6' | ternary('no', 'yes') }}"
-#    extra_opts:
-#      - --strip-components=1
 
 - name: Download my utils with git
   git:
@@ -75,16 +59,7 @@
   git:
     repo: 'https://git.doit.wisc.edu/MATYAS/newshell.git'
     dest: /usr/local/share/newshell
-    accept_hostkey: yes
-
-# - name: Download my shell dotfiles
-#   unarchive:
-#     src: https://git.doit.wisc.edu/MATYAS/newshell/-/archive/master/newshell-master.tar.gz
-#     dest: /usr/local/share/newshell
-#     remote_src: yes
-#     validate_certs: "{{ ansible_distribution_major_version == '6' | ternary('no', 'yes') }}"
-#     extra_opts:
-#       - --strip-components=1
+    accept_hostkey: true
 
 - name: Install shell dotfiles
   command: /usr/local/share/newshell/install.sh {{ item }}
@@ -98,7 +73,7 @@
   get_url:
     url: https://pages.cs.wisc.edu/~matyas/tmux.conf
     dest: /etc/tmux.conf
-    validate_certs: "{{ ansible_distribution_major_version == '7' | ternary('no', 'yes') }}"
+    validate_certs: "{{ ansible_distribution_major_version == '7' | ternary('false', 'true') }}"
 
 - name: Fix home dir permissions of vagrant user
   shell:
