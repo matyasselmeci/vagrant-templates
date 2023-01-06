@@ -4,8 +4,6 @@
 
     - name: Query version of centos-stream-repos
       shell: "rpm -q --queryformat='%{VERSION}\n' centos-stream-repos || :"
-      args:
-        warn: False
       register: centos_stream_repos_version
       changed_when: False
 
