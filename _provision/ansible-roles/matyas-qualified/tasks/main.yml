@@ -101,7 +101,6 @@
 - name: Fix home dir permissions of vagrant user
   shell:
     cmd: "chown -R vagrant: ~vagrant"
-    warn: false
 
 - name: Use zsh
   user: name={{ item }} shell=/bin/zsh
