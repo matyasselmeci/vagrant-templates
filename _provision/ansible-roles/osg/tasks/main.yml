@@ -4,8 +4,6 @@
 
 - name: Query version of osg-release
   shell: "rpm -q --queryformat='%{VERSION}\n' osg-release || :"
-  args:
-    warn: false
   register: osg_release_version
   changed_when: false
 
@@ -17,8 +15,6 @@
   # rpm --force allows downgrading. Immediately clear the yum cache to keep yum
   # from installing RPMs from the previous OSG repos if upgrading/downgrading
   shell: "rpm -U --force {{ rpmpath|quote }} && yum clean all"
-  args:
-    warn: false
   when: osg_release_version.stdout != osgver|string
 
 - name: Update osg-release
@@ -26,8 +22,6 @@
 
 - name: Import signing key(s)
   shell: "rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG*"
-  args:
-    warn: false
   changed_when: false
 
 - name: Add mock group
