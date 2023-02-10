@@ -1,6 +1,6 @@
 ---
-- name: Install singularity
+- name: Install apptainer-suid
   yum:
     state: latest
     name:
-      - singularity
+      - apptainer-suid
