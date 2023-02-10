@@ -54,3 +54,6 @@
 
 - import_tasks: 8.yml
   when: ansible_distribution_major_version == "8"
+
+- import_tasks: 9.yml
+  when: ansible_distribution_major_version == "9"
