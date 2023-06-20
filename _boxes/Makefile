@@ -37,6 +37,7 @@ addboxes:=$(patsubst %.box,add-%,$(boxes))
 .PHONY: $(addboxes)
 $(addboxes): add-%: %.box
 	vagrant box add --force $* $<
+	rm -f $<
 
 .PHONY: clean
 clean:
