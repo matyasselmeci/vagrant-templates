@@ -1,6 +1,6 @@
 #!/bin/sh
 if command -v ionice >&/dev/null; then
-  ionice -c idle nice make add-all && make clean
+  ionice -c idle nice make -k add-all && make clean
 else
-  nice make add-all && make clean
+  nice make -k add-all && make clean
 fi
