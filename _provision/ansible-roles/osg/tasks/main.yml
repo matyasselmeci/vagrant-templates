@@ -2,10 +2,8 @@
 - name: include rhel
   include_role: name=rhel
 
-- name: Query version of osg-release
-  shell: "rpm -q --queryformat='%{VERSION}\n' osg-release || :"
-  register: osg_release_version
-  changed_when: false
+- name: Get package facts
+  package_facts: manager=auto
 
 - name: Bootstrap osg-release
   # Download osg-release from repo.opensciencegrid.org if it's not installed or if it's
@@ -15,7 +13,7 @@
   # rpm --force allows downgrading. Immediately clear the yum cache to keep yum
   # from installing RPMs from the previous OSG repos if upgrading/downgrading
   shell: "rpm -U --force {{ rpmpath|quote }} && yum clean all"
-  when: osg_release_version.stdout != osgver|string
+  when: ansible_facts.packages['osg-release'].version != osgver|string
 
 - name: Update osg-release
   yum: name=osg-release  state=latest
