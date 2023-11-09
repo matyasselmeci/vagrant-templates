@@ -13,7 +13,7 @@
   # rpm --force allows downgrading. Immediately clear the yum cache to keep yum
   # from installing RPMs from the previous OSG repos if upgrading/downgrading
   shell: "rpm -U --force {{ rpmpath|quote }} && yum clean all"
-  when: ansible_facts.packages['osg-release'].version != osgver|string
+  when: not 'osg-release' in ansible_facts.packages or ansible_facts.packages['osg-release'].version != osgver|string
 
 - name: Update osg-release
   yum: name=osg-release  state=latest
