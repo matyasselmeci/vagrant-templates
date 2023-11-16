@@ -64,12 +64,20 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.provision "shell", inline: <<-SHELL
+    dd if=/dev/zero of=/swap bs=1048576 count=2048
+    chmod 0600 /swap
+    mkswap /swap
+    echo '/swap   swap    swap    defaults  0 0' >> /etc/fstab
+    swapon /swap
+
     rpm --import /etc/pki/rpm-gpg/*
     mkdir -p /etc/ansible
     [[ -e /etc/ansible/hosts ]] || \
       echo "localhost ansible_connection=local" > /etc/ansible/hosts
     dnf -y -d1 install epel-release
     dnf -y -d1 install ansible-collection-ansible-posix ansible-collection-community-general
+    dnf -y -d1 install langpacks-en glibc-langpack-en
+    localectl set-locale LANG=en_US.UTF-8
   SHELL
 
   config.vm.provision "shell", inline: <<-SHELL
