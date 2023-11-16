@@ -60,7 +60,7 @@ Vagrant.configure(2) do |config|
   # information on available options.
 
   config.vm.provider "hyperv" do |hyperv|
-    hyperv.memory = "1024"
+    hyperv.memory = "768"
   end
 
   config.vm.provision "shell", inline: <<-SHELL
