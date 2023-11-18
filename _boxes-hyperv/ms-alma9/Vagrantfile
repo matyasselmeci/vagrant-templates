@@ -42,7 +42,8 @@ Vagrant.configure(2) do |config|
   # the path on the host to the actual folder. The second argument is
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
-  config.vm.synced_folder ".", "/vagrant", type: "rsync"
+  #config.vm.synced_folder ".", "/vagrant", type: "rsync"
+  config.vm.synced_folder ".", "/vagrant", disabled: true
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -75,8 +76,9 @@ Vagrant.configure(2) do |config|
     [[ -e /etc/ansible/hosts ]] || \
       echo "localhost ansible_connection=local" > /etc/ansible/hosts
     dnf -y -d1 install epel-release
+    crb enable
     dnf -y -d1 install ansible-collection-ansible-posix ansible-collection-community-general
-    dnf -y -d1 install langpacks-en glibc-langpack-en
+    dnf -y -d1 install langpacks-en glibc-langpack-en git-core
     localectl set-locale LANG=en_US.UTF-8
   SHELL
 
@@ -84,13 +86,20 @@ Vagrant.configure(2) do |config|
     yum -y distro-sync --exclude=\*kernel\* --exclude=\*firmware\*
   SHELL
 
-  config.vm.provision :ansible_local do |ans|
-    ans.playbook = "playbook.yml"
-    ans.limit = "all"
-    ans.verbose = false
-    ans.inventory_path = "inventory"
-    ans.compatibility_mode = "2.0"
-  end
+  config.vm.provision "shell", inline: <<-SHELL
+    cd /usr/local/src
+    git clone https://github.com/matyasselmeci/vagrant-templates
+    cd vagrant-templates/_boxes-hyperv/ms-alma9/
+    ansible-playbook -clocal -llocalhost playbook.yml
+  SHELL
+
+  # config.vm.provision :ansible_local do |ans|
+  #   ans.playbook = "playbook.yml"
+  #   ans.limit = "all"
+  #   ans.verbose = false
+  #   ans.inventory_path = "inventory"
+  #   ans.compatibility_mode = "2.0"
+  # end
 
   config.vm.provision "shell", inline: <<-SHELL
     dnf mark install unzip zip
