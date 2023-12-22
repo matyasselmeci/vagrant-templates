@@ -5,7 +5,7 @@
 - name: Get package facts
   package_facts: manager=auto
 
-- name: Bootstrap osg-release
+- name: Bootstrap osg-release (pre-23)
   # Download osg-release from repo.opensciencegrid.org if it's not installed or if it's
   # the wrong version. This can't be done with the yum module because it
   # doesn't handle the downgrading properly.
@@ -13,7 +13,27 @@
   # rpm --force allows downgrading. Immediately clear the yum cache to keep yum
   # from installing RPMs from the previous OSG repos if upgrading/downgrading
   shell: "rpm -U --force {{ rpmpath|quote }} && yum clean all"
-  when: not 'osg-release' in ansible_facts.packages or ansible_facts.packages['osg-release'].version != osgver|string
+  when: >
+    osgver|float < 3.7
+    and (
+      not 'osg-release' in ansible_facts.packages
+      or ansible_facts.packages['osg-release'][0].version != osgver|string
+    )
+
+- name: Bootstrap osg-release (23+)
+  # Download osg-release from repo.opensciencegrid.org if it's not installed or if it's
+  # the wrong version. This can't be done with the yum module because it
+  # doesn't handle the downgrading properly.
+
+  # rpm --force allows downgrading. Immediately clear the yum cache to keep yum
+  # from installing RPMs from the previous OSG repos if upgrading/downgrading
+  shell: "rpm -U --force {{ rpmpath2|quote }} && yum clean all"
+  when: >
+    osgver|float > 3.7
+    and (
+      not 'osg-release' in ansible_facts.packages
+      or ansible_facts.packages['osg-release'][0].version != osgver|string
+    )
 
 - name: Update osg-release
   yum: name=osg-release  state=latest
