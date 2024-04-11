@@ -67,6 +67,10 @@ Vagrant.configure(2) do |config|
     swapon /swap
 
     rpm --import /etc/pki/rpm-gpg/*
+    # https://almalinux.org/blog/2023-12-20-almalinux-8-key-update/
+    rpm --import https://repo.almalinux.org/almalinux/RPM-GPG-KEY-AlmaLinux
+    dnf -y -d1 upgrade almalinux-release
+
     mkdir -p /etc/ansible
     [[ -e /etc/ansible/hosts ]] || \
       echo "localhost ansible_connection=local" > /etc/ansible/hosts
