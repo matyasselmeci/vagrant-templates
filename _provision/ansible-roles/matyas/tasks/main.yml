@@ -71,7 +71,7 @@
 
 - name: Download tmuxrc
   get_url:
-    url: https://pages.cs.wisc.edu/~matyas/tmux.conf
+    url: https://pages.cs.wisc.edu/~matyas/tmux-inner.conf
     dest: /etc/tmux.conf
     validate_certs: "{{ ansible_distribution_major_version == '7' | ternary('false', 'true') }}"
 
